@@ -3,6 +3,7 @@ package io.github.sterlingsutton2006;
 class Fraction {
     private int numerator;
     private int denominator;
+    private int whole;
 
     public Fraction(int numerator, int denominator) {
         if (denominator == 0) {
@@ -23,6 +24,10 @@ class Fraction {
         return numerator;
     }
 
+    public int getWhole() {
+        return whole;
+    }
+
     public void setDenominator(int denominator) {
         this.denominator = denominator;
     }
@@ -31,8 +36,12 @@ class Fraction {
         this.numerator = numerator;
     }
 
+    public void setWhole(int whole) {
+        this.whole = whole;
+    }
+
     public double getValue() {
-        return (double) numerator / (double) denominator;
+        return whole + ((double) numerator / (double) denominator);
     }
 
     public boolean equals(Fraction fraction) {
@@ -52,6 +61,16 @@ class Fraction {
     }
 
     public void reduce() {
+
+        int sign = 1;
+
+        if (numerator < 0 && !(denominator < 0) || denominator < 0 && !(numerator < 0)) {
+            sign = -1;
+        }
+
+        numerator = Math.abs(numerator);
+        denominator = Math.abs(denominator);
+
         int gcfGuess;
         if (numerator < denominator || numerator == denominator) {
             gcfGuess = numerator;
@@ -70,14 +89,29 @@ class Fraction {
                 gcfGuess--;
             }
         }
+
+        if (numerator >= denominator) {
+            whole = sign * (numerator / denominator);
+            numerator = numerator % denominator;
+        }
+        else {
+            numerator *= sign;
+        }
+
     }
 
     public String toString() {
-        if (denominator != 1) {
-            return (numerator + "/" + denominator);
+        String returnStr = "";
+        if (whole != 0 && numerator == 0) {
+            returnStr += whole;
+        }
+        else if (whole != 0) {
+            returnStr += whole + "_";
+            returnStr += numerator + "/" + denominator;
         }
         else {
-            return (numerator + "");
+            returnStr += numerator + "/" + denominator;
         }
+        return returnStr;
     }
 }

@@ -38,10 +38,10 @@ class FractionRunner {
             System.out.println(fractionOne + " is equivalent to " + fractionTwo);
         }
         else if (fractionOne.compareTo(fractionTwo) == 1) {
-            System.out.println(fractionOne + " is bigger than " + fractionTwo);
+            System.out.println(fractionOne + " is greater than " + fractionTwo);
         }
         else {
-            System.out.println(fractionOne + " is smaller than " + fractionTwo);
+            System.out.println(fractionOne + " is less than " + fractionTwo);
         }
 
 
